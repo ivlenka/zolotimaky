@@ -116,9 +116,9 @@ find "$GALLERY_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.pn
     # Generate alt text from filename (remove extension and replace special chars)
     alt_text=$(echo "$filename" | sed 's/\.[^.]*$//' | sed 's/[-_]/ /g')
 
-    # Paths for thumbnail and full-size
-    thumbnail_src="$THUMBNAILS_DIR/$filename"
-    fullsize_src="$img"
+    # Paths for thumbnail and full-size (relative to docs/ root)
+    thumbnail_src="thumbnails/$filename"
+    fullsize_src="../$img"
 
     # Generate carousel item (for index.html) - thumbnail with data-fullsize attribute
     echo "                        <div class=\"gallery-item\" data-fullsize=\"$fullsize_src\">"

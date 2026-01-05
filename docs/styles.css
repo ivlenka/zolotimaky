@@ -249,7 +249,7 @@ b {
 
 .hero-logo-container {
     position: relative;
-    max-width: 300px;
+    max-width: 450px;
     width: 100%;
     margin: 0 auto 2rem auto;
     display: block;
@@ -266,7 +266,7 @@ b {
 
 .hero-logo-vinok {
     position: absolute;
-    width: 200px;
+    width: 450px;
     height: auto;
     top: 50%;
     left: 50%;
