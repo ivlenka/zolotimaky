@@ -1006,6 +1006,47 @@ b {
     .gallery-item img {
         height: 500px;
     }
+
+    /* Mobile Lightbox: Full screen with orange arrow backgrounds */
+    .lightbox {
+        background: rgba(0, 0, 0, 0.95);
+    }
+
+    .lightbox img {
+        max-width: 100%;
+        max-height: 100%;
+        box-shadow: none;
+    }
+
+    .lightbox-close {
+        top: 20px;
+        right: 20px;
+        color: var(--text-white);
+        font-size: 2.5rem;
+    }
+
+    .lightbox-nav {
+        background: #e87605;
+        color: var(--text-white);
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+        border-radius: 4px;
+    }
+
+    .lightbox-nav:hover {
+        background: #d06805;
+        color: var(--text-white);
+        transform: translateY(-50%) scale(1.05);
+    }
+
+    .lightbox-nav-prev {
+        left: 10px;
+    }
+
+    .lightbox-nav-next {
+        right: 10px;
+    }
 }
 
 /* Medium screens - 3 items */

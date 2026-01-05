@@ -48,13 +48,8 @@ if (contactForm && formMessage) {
 
         // For now, just show a success message
         // In production, this would connect to a form service like Formspree or Web3Forms
-        console.log('Form submitted:', formData);
-
-        // Show success message
         formMessage.textContent = 'Thank you for your message! We\'ll get back to you soon.';
         formMessage.className = 'form-message success';
-
-        // Reset form
         contactForm.reset();
 
         // Hide message after 5 seconds
@@ -108,7 +103,7 @@ const nextButton = document.getElementById('nextSlide');
 
 function getItemsPerView() {
     const width = window.innerWidth;
-    if (width <= 768) return 2;
+    if (width <= 768) return 1;  // Mobile: 1 image at a time
     if (width <= 1024) return 3;
     return 4;
 }
@@ -148,99 +143,95 @@ if (nextButton && prevButton && galleryTrack) {
     prevButton.addEventListener('click', prevSlide);
 
     // Update carousel on window resize
-    window.addEventListener('resize', updateCarousel);
+    window.addEventListener('resize', () => {
+        updateCarousel();
+    });
+
+    // Initialize
+    updateCarousel();
 }
 
 // Lightbox functionality
 const lightbox = document.getElementById('lightbox');
-const lightboxImage = document.getElementById('lightboxImage');
+const lightboxImg = document.getElementById('lightboxImage');
 const lightboxClose = document.getElementById('lightboxClose');
 const lightboxPrev = document.getElementById('lightboxPrev');
 const lightboxNext = document.getElementById('lightboxNext');
 
-let currentLightboxIndex = 0;
-let galleryItems = [];
+if (lightbox && lightboxImg) {
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    let currentLightboxIndex = 0;
+    const lightboxImages = Array.from(galleryItems).map(item => ({
+        fullsize: item.getAttribute('data-fullsize'),
+        alt: item.querySelector('img').alt
+    }));
 
-// Build gallery items array
-function buildGalleryArray() {
-    galleryItems = Array.from(document.querySelectorAll('.gallery-item')).filter(item => {
-        const img = item.querySelector('img');
-        return img && img.tagName === 'IMG';
+    function openLightbox(index) {
+        currentLightboxIndex = index;
+        lightboxImg.src = lightboxImages[index].fullsize;
+        lightboxImg.alt = lightboxImages[index].alt;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function showPrevImage() {
+        currentLightboxIndex = (currentLightboxIndex - 1 + lightboxImages.length) % lightboxImages.length;
+        lightboxImg.src = lightboxImages[currentLightboxIndex].fullsize;
+        lightboxImg.alt = lightboxImages[currentLightboxIndex].alt;
+    }
+
+    function showNextImage() {
+        currentLightboxIndex = (currentLightboxIndex + 1) % lightboxImages.length;
+        lightboxImg.src = lightboxImages[currentLightboxIndex].fullsize;
+        lightboxImg.alt = lightboxImages[currentLightboxIndex].alt;
+    }
+
+    // Add click event to all gallery items
+    galleryItems.forEach((item, index) => {
+        item.addEventListener('click', () => openLightbox(index));
     });
-}
 
-// Show image in lightbox
-function showLightboxImage(index) {
-    if (galleryItems.length === 0) return;
+    // Close lightbox
+    if (lightboxClose) {
+        lightboxClose.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeLightbox();
+        });
+    }
 
-    currentLightboxIndex = (index + galleryItems.length) % galleryItems.length;
-    const item = galleryItems[currentLightboxIndex];
-    const fullsizeSrc = item.getAttribute('data-fullsize') || item.querySelector('img').src;
-    const imgElement = item.querySelector('img');
+    // Navigation
+    if (lightboxPrev) {
+        lightboxPrev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            showPrevImage();
+        });
+    }
 
-    lightboxImage.src = fullsizeSrc;
-    lightboxImage.alt = imgElement.alt;
-}
+    if (lightboxNext) {
+        lightboxNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            showNextImage();
+        });
+    }
 
-// Open lightbox
-buildGalleryArray();
-
-document.querySelectorAll('.gallery-item').forEach((item, index) => {
-    item.addEventListener('click', (e) => {
-        const imgElement = item.querySelector('img') || item.querySelector('.placeholder-image');
-        if (imgElement && imgElement.tagName === 'IMG') {
-            currentLightboxIndex = galleryItems.indexOf(item);
-            showLightboxImage(currentLightboxIndex);
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
+    // Close on background click
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            closeLightbox();
         }
     });
-});
 
-// Close lightbox
-function closeLightbox() {
-    lightbox.classList.remove('active');
-    document.body.style.overflow = 'auto';
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') showPrevImage();
+        if (e.key === 'ArrowRight') showNextImage();
+    });
 }
-
-lightboxClose.addEventListener('click', (e) => {
-    e.stopPropagation();
-    closeLightbox();
-});
-
-// Navigation arrows
-lightboxPrev.addEventListener('click', (e) => {
-    e.stopPropagation();
-    showLightboxImage(currentLightboxIndex - 1);
-});
-
-lightboxNext.addEventListener('click', (e) => {
-    e.stopPropagation();
-    showLightboxImage(currentLightboxIndex + 1);
-});
-
-// Close lightbox when clicking on the background
-lightbox.addEventListener('click', () => {
-    closeLightbox();
-});
-
-// Prevent closing when clicking on the image or nav buttons
-lightboxImage.addEventListener('click', (e) => {
-    e.stopPropagation();
-});
-
-// Keyboard navigation
-document.addEventListener('keydown', (e) => {
-    if (!lightbox.classList.contains('active')) return;
-
-    if (e.key === 'Escape') {
-        closeLightbox();
-    } else if (e.key === 'ArrowLeft') {
-        showLightboxImage(currentLightboxIndex - 1);
-    } else if (e.key === 'ArrowRight') {
-        showLightboxImage(currentLightboxIndex + 1);
-    }
-});
-
-// Optional: Auto-play carousel (commented out - uncomment if desired)
-// setInterval(nextSlide, 5000);
