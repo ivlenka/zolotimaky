@@ -369,9 +369,20 @@ b {
 }
 
 /* Specific decoration styles */
+.about .section-title-wrapper {
+    position: relative;
+}
+
+.about .section-title {
+    position: relative;
+    left: 0;
+}
+
 .about .section-title-decoration-right {
     height: 180px;
     transform: translateY(-20%);
+    position: absolute;
+    left: calc(50% + 150px);
 }
 
 .gallery .section-title-decoration-right {

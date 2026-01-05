@@ -2,7 +2,7 @@
 
 # Unified gallery generator with automatic image optimization
 # - Resizes source images in gallery/ to 1080px (full-size for lightbox)
-# - Creates 480px thumbnails for carousel/grid display
+# - Creates 720px thumbnails for carousel/grid display
 # - Generates both index.html and gallery.html
 
 GALLERY_DIR="gallery"
@@ -78,7 +78,7 @@ echo "  ✓ Optimized: $optimized_count images"
 echo "  ✓ Already optimal: $skipped_count images"
 echo ""
 
-echo "Step 2: Creating 480px thumbnails..."
+echo "Step 2: Creating 720px thumbnails..."
 echo "--------------------------------------------"
 
 thumbnail_count=0
@@ -87,8 +87,8 @@ find "$GALLERY_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.pn
     filename=$(basename "$img")
     thumbnail_path="$THUMBNAILS_DIR/$filename"
 
-    # Create thumbnail (480px max)
-    sips --resampleHeightWidthMax 480 "$img" --out "$thumbnail_path" > /dev/null 2>&1
+    # Create thumbnail (720px max)
+    sips --resampleHeightWidthMax 720 "$img" --out "$thumbnail_path" > /dev/null 2>&1
 
     if [ $? -eq 0 ]; then
         echo $((thumbnail_count + 1)) > /tmp/thumbnail_count.txt
@@ -178,7 +178,7 @@ echo "========================================="
 echo ""
 echo "Image Sizes:"
 echo "  • Gallery (1080px max) - Used in lightbox"
-echo "  • Thumbnails (480px) - Used in carousel/grid"
+echo "  • Thumbnails (720px) - Used in carousel/grid"
 echo ""
 echo "Generated Files:"
 echo "  • $INDEX_OUTPUT (carousel with $count images)"
@@ -186,6 +186,6 @@ echo "  • $GALLERY_OUTPUT (grid with $count images)"
 echo "  • Image order is identical in both"
 echo ""
 echo "Performance:"
-echo "  ✓ Fast loading with 480px thumbnails"
+echo "  ✓ Fast loading with 720px thumbnails"
 echo "  ✓ High quality lightbox with 1080px images"
 echo ""
