@@ -997,10 +997,10 @@ b {
         font-size: 2rem;
     }
 
-    /* Mobile: 1 image per line, twice bigger */
+    /* Mobile: 1 image per line, 350px height */
     .gallery-item {
         flex: 0 0 100%;
-        height: 500px;
+        height: 350px;
         box-shadow: none;
         border: none;
     }
@@ -1011,7 +1011,7 @@ b {
     }
 
     .gallery-item img {
-        height: 500px;
+        height: 350px;
     }
 
     /* Mobile: add space after mak3 decoration (same as mak2 to Dance Packages) */
