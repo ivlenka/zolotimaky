@@ -1015,8 +1015,9 @@ b {
     }
 
     /* Mobile: reduce carousel spacing (half of desktop) */
+    /* Add top padding to create space after mak3 decoration */
     .gallery {
-        padding: 50px 0;
+        padding: 120px 0 50px 0;
     }
 
     /* Mobile: make mak4 decoration half the size */
@@ -1048,7 +1049,7 @@ b {
         width: 40px;
         height: 40px;
         font-size: 1.5rem;
-        border-radius: 4px;
+        border-radius: 0;
         /* Ensure arrow is centered in the square */
         display: flex;
         align-items: center;
