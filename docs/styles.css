@@ -1028,10 +1028,15 @@ b {
     .lightbox-nav {
         background: #e87605;
         color: var(--text-white);
-        width: 50px;
-        height: 50px;
-        font-size: 2rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
         border-radius: 4px;
+        /* Ensure arrow is centered in the square */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
     }
 
     .lightbox-nav:hover {
