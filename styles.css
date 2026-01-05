@@ -7,8 +7,8 @@
 
 :root {
     /* Clean Modern Color Palette */
-    --primary-black: #000000;
-    --primary-dark: #1a1a1a;
+    --primary-black: rgba(0, 0, 0, 0.75);
+    --primary-dark: rgba(26, 26, 26, 0.75);
     --accent-gold: #d4af37;
     --accent-blue: #0057b7; /* Ukrainian blue */
     --accent-red: #c41e3a; /* Ukrainian red */
@@ -20,7 +20,7 @@
     --bg-card: #ffffff;
 
     /* Text Colors */
-    --text-dark: #000000;
+    --text-dark: rgba(0, 0, 0, 0.75);
     --text-gray: #4a4a4a;
     --text-muted: #888888;
     --text-white: #ffffff;
@@ -148,10 +148,18 @@ b {
 }
 
 .nav-brand {
-    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.125rem;
     font-weight: 700;
     color: var(--primary-black);
     letter-spacing: 0px;
+}
+
+.nav-brand-icon {
+    height: 32px;
+    width: auto;
 }
 
 .nav-menu {
@@ -162,7 +170,7 @@ b {
 
 .nav-menu a {
     text-decoration: none;
-    color: var(--primary-black);
+    color: rgba(0, 0, 0, 0.5);
     font-weight: 500;
     font-size: 0.95rem;
     letter-spacing: 0px;
@@ -176,13 +184,13 @@ b {
     bottom: -5px;
     left: 0;
     width: 0;
-    height: 2px;
-    background: var(--primary-black);
+    height: 1px;
+    background: #f9a01f;
     transition: width 0.2s ease;
 }
 
 .nav-menu a:hover {
-    color: var(--text-gray);
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .nav-menu a:hover::after {
@@ -232,13 +240,43 @@ b {
     padding: 0 20px;
 }
 
-.hero-logo {
+.hero-logo-container {
+    position: relative;
     max-width: 300px;
     width: 100%;
+    margin: 0 auto 2rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-logo-words {
+    width: 100%;
     height: auto;
-    margin-bottom: 2rem;
-    opacity: 1;
+    position: relative;
+    z-index: 2;
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+.hero-logo-vinok {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+    animation: rotate 40s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 
 .hero-subtitle {
@@ -587,7 +625,7 @@ b {
         display: flex;
     }
 
-    .hero-logo {
+    .hero-logo-container {
         max-width: 200px;
     }
 
