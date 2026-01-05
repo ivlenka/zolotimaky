@@ -1014,10 +1014,9 @@ b {
         height: 500px;
     }
 
-    /* Mobile: reduce carousel spacing (half of original values) */
-    /* Add top padding to create space after mak3 decoration */
+    /* Mobile: add space after mak3 decoration (same as mak2 to Dance Packages) */
     .gallery {
-        padding: 60px 0 25px 0;
+        padding: 120px 0 25px 0;
     }
 
     /* Mobile: make mak4 decoration half the size */
