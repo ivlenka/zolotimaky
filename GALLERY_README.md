@@ -1,6 +1,6 @@
 # Gallery Generator System
 
-This folder contains automated gallery generators that create photo galleries from all images in the `gallery/` directory.
+This folder contains an automated gallery generator that creates photo galleries from all images in the `gallery/` directory.
 
 ## Files
 
@@ -8,11 +8,10 @@ This folder contains automated gallery generators that create photo galleries fr
 - **index-template.html** - Template for the main page with carousel gallery
 - **gallery-template.html** - Template for the full gallery page
 
-### Generation Scripts
-- **generate_index.sh** - Generates index.html with carousel of ALL gallery images
-- **generate_gallery.sh** - Generates gallery.html with grid of ALL gallery images
+### Generation Script
+- **generate_galleries.sh** - Generates BOTH index.html and gallery.html in one go
 
-### Generated Files (Auto-created by scripts)
+### Generated Files (Auto-created by script)
 - **index.html** - Main page with carousel gallery
 - **gallery.html** - Full gallery page with grid layout
 
@@ -20,29 +19,26 @@ This folder contains automated gallery generators that create photo galleries fr
 
 ### When Adding New Photos
 
-Whenever you add new photos to the `gallery/` folder, run BOTH scripts:
+Whenever you add new photos to the `gallery/` folder, simply run:
 
 ```bash
-./generate_index.sh    # Updates main page carousel
-./generate_gallery.sh  # Updates full gallery page
+./generate_galleries.sh
 ```
 
-Or run them together:
-```bash
-./generate_index.sh && ./generate_gallery.sh
-```
-
-### What Each Script Does
-
-**generate_index.sh:**
+This single command:
 - Scans all images in `gallery/` directory
 - Generates `index.html` with carousel containing ALL images
-- Carousel shows 2-4 images at a time (responsive)
-
-**generate_gallery.sh:**
-- Scans all images in `gallery/` directory
 - Generates `gallery.html` with grid of ALL images
-- Grid is fully responsive with lightbox zoom
+- **Keeps the same image order in both files**
+
+### What the Script Does
+
+The unified script:
+- Scans the gallery folder once for all JPG/PNG images
+- Generates carousel items for index.html (shows 2-4 at a time)
+- Generates grid items for gallery.html (shows all at once)
+- Ensures identical image order in both galleries
+- Provides a summary of what was generated
 
 ### Supported Formats
 
