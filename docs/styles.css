@@ -1001,10 +1001,27 @@ b {
     .gallery-item {
         flex: 0 0 100%;
         height: 500px;
+        box-shadow: none;
+        border: none;
+    }
+
+    .gallery-item:hover {
+        box-shadow: none;
+        transform: none;
     }
 
     .gallery-item img {
         height: 500px;
+    }
+
+    /* Mobile: reduce carousel spacing (half of desktop) */
+    .gallery {
+        padding: 50px 0;
+    }
+
+    /* Mobile: make mak4 decoration half the size */
+    .contact-decoration {
+        height: 30%;
     }
 
     /* Mobile Lightbox: Full screen with orange arrow backgrounds */
