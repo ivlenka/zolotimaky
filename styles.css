@@ -522,7 +522,7 @@ b {
 }
 
 .gallery-item {
-    flex: 0 0 calc(25% - 0.75rem);
+    flex: 0 0 auto;
     border: none;
     overflow: hidden;
     box-shadow: none;
