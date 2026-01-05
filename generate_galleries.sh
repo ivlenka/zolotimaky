@@ -9,6 +9,7 @@ GALLERY_DIR="gallery"
 THUMBNAILS_DIR="thumbnails"
 INDEX_TEMPLATE="index-template.html"
 GALLERY_TEMPLATE="gallery-template.html"
+LIGHTBOX_TEMPLATE="lightbox-template.html"
 INDEX_OUTPUT="index.html"
 GALLERY_OUTPUT="gallery.html"
 
@@ -31,6 +32,11 @@ fi
 
 if [ ! -f "$GALLERY_TEMPLATE" ]; then
     echo "Error: Gallery template not found!"
+    exit 1
+fi
+
+if [ ! -f "$LIGHTBOX_TEMPLATE" ]; then
+    echo "Error: Lightbox template not found!"
     exit 1
 fi
 
@@ -141,6 +147,10 @@ awk '
     system("cat /tmp/gallery_carousel_items.txt")
     next
 }
+/<!-- LIGHTBOX_PLACEHOLDER -->/ {
+    system("cat '"$LIGHTBOX_TEMPLATE"'")
+    next
+}
 { print }
 ' "$INDEX_TEMPLATE" > "$INDEX_OUTPUT"
 
@@ -148,6 +158,10 @@ awk '
 awk '
 /<!-- GALLERY_ITEMS_PLACEHOLDER -->/ {
     system("cat /tmp/gallery_grid_items.txt")
+    next
+}
+/<!-- LIGHTBOX_PLACEHOLDER -->/ {
+    system("cat '"$LIGHTBOX_TEMPLATE"'")
     next
 }
 { print }
