@@ -6,12 +6,12 @@
 # - Generates both index.html and gallery.html
 
 GALLERY_DIR="gallery"
-THUMBNAILS_DIR="thumbnails"
-INDEX_TEMPLATE="index-template.html"
-GALLERY_TEMPLATE="gallery-template.html"
-LIGHTBOX_TEMPLATE="lightbox-template.html"
-INDEX_OUTPUT="index.html"
-GALLERY_OUTPUT="gallery.html"
+THUMBNAILS_DIR="docs/thumbnails"
+INDEX_TEMPLATE="templates/index-template.html"
+GALLERY_TEMPLATE="templates/gallery-template.html"
+LIGHTBOX_TEMPLATE="templates/lightbox-template.html"
+INDEX_OUTPUT="docs/index.html"
+GALLERY_OUTPUT="docs/gallery.html"
 
 echo "========================================="
 echo "  Gallery Generator with Optimization"
